@@ -1,12 +1,16 @@
 import '../styles/globals.less';
-import type { AppProps } from 'next/app';
-import Layout from '../components/layout/layout';
+import React from 'react';
+import App, { AppProps } from 'next/app';
+// import Layout from '../components/layout/layout';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
+  console.log(pageProps);
+  const CurrentLayout = Component.Layout ? Component.Layout : React.Fragment;
+
   return (
-    <Layout>
+    <CurrentLayout>
       <Component {...pageProps} />
-    </Layout>
+    </CurrentLayout>
   );
 }
 

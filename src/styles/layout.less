@@ -32,4 +32,32 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
+  &__link-wrapper {
+    height: 100%;
+    width: 48px;
+    margin: auto;
+  }
+  &__link {
+    margin: auto;
+    color: @muted-color;
+    &--active {
+      color: @pink-color;
+    }
+  }
+  &__center-button {
+    height: 48px;
+    width: 48px;
+    border: 0px solid;
+    border-radius: 100%;
+    background-color: @pink-color;
+    color: white;
+    .c-navbar__button-text {
+      height: 50%;
+      width: 50%;
+      margin: auto;
+      h1 {
+        margin: auto;
+      }
+    }
+  }
 }

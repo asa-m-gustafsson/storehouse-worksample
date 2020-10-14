@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import Head from 'next/head';
 import '../styles/index.less';
+import Layout from '../components/layout/layout';
+import { NextPage } from 'next';
 
-const Index = () => {
+type Page = NextPage & {
+  Layout?: (props: { children?: ReactNode }) => JSX.Element;
+};
+
+const Index: Page = () => {
   const [testVar, setTestVar] = useState('');
 
   useEffect(() => {
@@ -14,32 +20,35 @@ const Index = () => {
         console.log(JSON.parse(JSON.stringify(json)));
       });
   }, []);
-
   return (
     <div>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
+      <div>
+        <Head>
+          <title>Title for Index!</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
 
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
-      <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+        <h1>TEST</h1>
+      </div>
     </div>
   );
 };
+
+Index.Layout = Layout;
 
 export default Index;

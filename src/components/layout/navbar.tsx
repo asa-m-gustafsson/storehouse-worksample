@@ -10,7 +10,7 @@ const NavBar = () => {
         style={{ width: '10%', height: '100%', backgroundColor: 'blue' }}
       ></div>
       <div
-        style={{ width: '10%', height: '100%', backgroundColor: 'red' }}
+        style={{ width: '20%', height: '100%', backgroundColor: 'red' }}
       ></div>
       <div
         style={{ width: '10%', height: '100%', backgroundColor: 'blue' }}
