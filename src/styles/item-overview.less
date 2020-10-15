@@ -1,0 +1,55 @@
+@import 'variables.less';
+
+.c-item-overview {
+  width: 100%;
+  height: 100%;
+  padding: 8px 0;
+
+  &__headline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 16px;
+    width: 100%;
+
+    span {
+      font-weight: 300;
+      color: @dark-gray-color;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+  }
+
+  &__list {
+    width: 100%;
+  }
+}
+
+.c-item-card {
+  width: 100%;
+  background-color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  &__left-wrapper {
+    height: 56px;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  &__picture {
+    border: 2px solid @gray-color;
+    border-radius: 100%;
+    height: 56px;
+    width: 56px;
+    margin: 0;
+  }
+  &__item-name {
+    margin-left: 16px;
+    font-size: 20px;
+  }
+}

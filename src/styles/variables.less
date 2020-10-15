@@ -1,2 +1,32 @@
-@muted-color: #d9d9d9;
-@pink-color: #ffc9ca;
+// Variables
+@offwhite-color-hsl: hsl(0, 0%, 97%);
+@offwhite-color: rgb(@offwhite-color-hsl);
+
+@light-gray-color-hsl: hsl(0, 0, 85%);
+@light-gray-color: rgb(@light-gray-color-hsl);
+
+@gray-color-hsl: hsl(0, 0, 60%);
+@gray-color: rgb(@gray-color-hsl);
+
+@dark-gray-color-hsl: hsl(0, 0%, 30%);
+@dark-gray-color: rgb(@dark-gray-color-hsl);
+
+@pink-color-hsl: hsl(359, 100%, 89%);
+@pink-color: rgb(@pink-color-hsl);
+
+@teal-color-hsl: hsl(182, 24%, 58%);
+@teal-color: rgb(@teal-color-hsl);
+@testLight: hsl(184, 30%, 67%);
+@testDark: hsl(183, 23%, 51%);
+
+// Mixins
+
+.shaded-button(@button-color-hsl, @lighten-by-percent: 5%) {
+  background-color: rgb(@button-color-hsl);
+  box-shadow: rgb(@button-color-hsl) 0 2px 4px inset;
+  background-image: linear-gradient(
+    rgb(lighten(@button-color-hsl, @lighten-by-percent)),
+    rgb(@button-color-hsl),
+    rgb(darken(@button-color-hsl, 5%))
+  );
+}

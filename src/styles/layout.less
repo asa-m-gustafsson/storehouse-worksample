@@ -8,17 +8,20 @@
   &__content {
     flex: 1;
     overflow-y: auto;
+    background-color: @offwhite-color;
   }
   &__header,
   &__navbar {
     min-height: 56px;
     width: 100%;
+    z-index: 100;
+    background-color: white;
   }
   &__header {
-    box-shadow: 0px 2px 4px @muted-color;
+    box-shadow: 0px 2px 4px @light-gray-color;
   }
   &__navbar {
-    border-top: 0.5px solid @muted-color;
+    border-top: 0.5px solid @light-gray-color;
   }
 }
 
@@ -39,7 +42,7 @@
   }
   &__link {
     margin: auto;
-    color: @muted-color;
+    color: @gray-color;
     &--active {
       color: @pink-color;
     }

@@ -20,11 +20,14 @@ const Index: Page = () => {
         console.log(JSON.parse(JSON.stringify(json)));
       });
   }, []);
+
+  const title: string = 'Vinden';
+
   return (
     <div>
       <div>
         <Head>
-          <title>Title for Index!</title>
+          <title>{title}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <h1>TEST</h1>
