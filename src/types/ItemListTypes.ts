@@ -1,6 +1,6 @@
 import { LocationType, EventType } from './Enums';
 
-export interface OverviewList {
+export interface ItemList {
   eventDate?: Date;
   items: GenericListEntry[];
 }

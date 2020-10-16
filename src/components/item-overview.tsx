@@ -1,10 +1,16 @@
 import React from 'react';
 import '../styles/item-overview.less';
-import ItemList from './item-list';
-import { OverviewList, GenericListEntry } from '../types/ItemOverviewTypes';
+import ItemListItem from './item-list-item';
+import ItemListGroup from './item-list-group';
+import {
+  ItemList,
+  GenericListEntry,
+  ListEntryIsItem,
+} from '../types/ItemListTypes';
+import { LocationType, EventType } from '../types/Enums';
 
-const ItemOverview = () => {
-  const overviewList: OverviewList[] = [
+const ItemOverview = ({ location }: { location: LocationType }) => {
+  const overviewList: ItemList[] = [
     {
       eventDate: new Date(),
       items: [
@@ -84,7 +90,15 @@ const ItemOverview = () => {
             </span>
             <span>{`${overView.items.length} saker`}</span>
           </div>
-          <ItemList entryList={overView.items} />
+          <div className="c-item-list">
+            {overView.items.map((entry) => {
+              return ListEntryIsItem(entry) ? (
+                <ItemListItem item={entry} />
+              ) : (
+                <ItemListGroup group={entry} />
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
