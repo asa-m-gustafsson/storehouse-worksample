@@ -26,7 +26,7 @@ const ItemListGroup = ({ group }: { group: GroupListEntry }) => {
           </div>
           <span className="c-item-card__item-text">{group.name}&nbsp;</span>
           <span className="c-item-card__item-text c-item-card__item-text--details">
-            {` - Grupp (${group.items.length} st)`}
+            {` - Grupp (${group.items.length} kollin)`}
           </span>
         </div>
         <h1>{`>`}</h1>

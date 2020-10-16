@@ -1,3 +1,10 @@
+import { LocationType, EventType } from './Enums';
+
+export interface OverviewList {
+  eventDate?: Date;
+  items: GenericListEntry[];
+}
+
 export interface ItemListEntry {
   name: string;
   photo_url?: string;
