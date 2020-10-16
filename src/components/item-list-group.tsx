@@ -2,8 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ItemListEntry, GroupListEntry } from '../types/ItemOverviewTypes';
 import ItemListItem from './item-list-item';
 
-const ItemListGroup = ({ group }: { group: GroupListEntry }) => {
-  const [expanded, setExpanded] = useState<boolean>(false);
+const ItemListGroup = ({
+  group,
+  expanded,
+  toggleExpanded,
+}: {
+  group: GroupListEntry;
+  expanded: boolean;
+  toggleExpanded: (id: number) => void;
+}) => {
+  // const [expanded, setExpanded] = useState<boolean>(false);
   const cardRef = useRef(null);
 
   if (!group.items.length) {
@@ -14,7 +22,7 @@ const ItemListGroup = ({ group }: { group: GroupListEntry }) => {
     <div className="c-item-group">
       <div
         className="c-item-card c-item-card--group"
-        onClick={() => setExpanded(!expanded)}
+        onClick={() => toggleExpanded(expanded ? 0 : group.id)}
         ref={cardRef}
       >
         <div className="c-item-card__left-wrapper">
