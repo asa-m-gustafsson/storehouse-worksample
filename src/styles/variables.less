@@ -21,12 +21,12 @@
 
 // Mixins
 
-.shaded-button(@button-color-hsl, @lighten-by-percent: 5%) {
-  background-color: rgb(@button-color-hsl);
-  box-shadow: rgb(@button-color-hsl) 0 2px 4px inset;
+.shaded-div(@div-color-hsl, @lighten-by-percent: 5%) {
+  background-color: rgb(@div-color-hsl);
+  box-shadow: rgb(@div-color-hsl) 0 2px 4px inset;
   background-image: linear-gradient(
-    rgb(lighten(@button-color-hsl, @lighten-by-percent)),
-    rgb(@button-color-hsl),
-    rgb(darken(@button-color-hsl, 5%))
+    rgb(lighten(@div-color-hsl, @lighten-by-percent)),
+    rgb(@div-color-hsl),
+    rgb(darken(@div-color-hsl, 5%))
   );
 }
