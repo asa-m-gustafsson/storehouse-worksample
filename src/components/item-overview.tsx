@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../styles/item-overview.less';
 import ItemListItem from './item-list-item';
 import ItemListGroup from './item-list-group';
@@ -6,10 +6,12 @@ import {
   ItemList,
   GenericListEntry,
   ListEntryIsItem,
-} from '../types/ItemListTypes';
-import { LocationType, EventType } from '../types/Enums';
+} from '../types/item-list-types';
+import { LocationType, EventType } from '../types/enums';
+import { ApiContext } from './fake-api/api-context';
 
 const ItemOverview = ({ location }: { location: LocationType }) => {
+  const { state, dispatch } = useContext(ApiContext);
   const [expandedGroupId, setExpandedGroupId] = useState(0);
   const dateFormat = new Intl.DateTimeFormat('sv-SE', {
     day: 'numeric',
@@ -29,6 +31,8 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
         return 'Har bör ett fel kastas';
     }
   };
+
+  console.log(state);
 
   return (
     <div className="c-item-overview">

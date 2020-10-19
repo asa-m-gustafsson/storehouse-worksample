@@ -1,4 +1,4 @@
-import { LocationType, EventType } from './Enums';
+import { LocationType, EventType } from './enums';
 
 export interface ItemList {
   eventDate?: Date;

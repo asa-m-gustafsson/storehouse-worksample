@@ -1,8 +1,7 @@
-import { LocationType, EventType } from './Enums';
+import { LocationType, EventType } from './enums';
 
 export interface ItemInfo {
   id: number;
-  uniqueIdentifier: string; // GUID goes here
   name: string;
   description?: string;
   photo_url?: string;
@@ -10,15 +9,15 @@ export interface ItemInfo {
 }
 
 export interface Dimensions {
-  Height: number;
-  Width: number;
-  Depth: number;
+  height: number;
+  width: number;
+  depth: number;
 }
 
-export interface Item {
+export interface ItemEntity {
   id: number;
   //owner?
-  info_identifier: string;
+  info_id: number;
   group_id?: number;
   location: LocationType;
   //isActive?

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ItemListEntry, GroupListEntry } from '../types/ItemOverviewTypes';
+import { ItemListEntry, GroupListEntry } from '../types/item-list-types';
 import ItemListItem from './item-list-item';
 
 const ItemListGroup = ({

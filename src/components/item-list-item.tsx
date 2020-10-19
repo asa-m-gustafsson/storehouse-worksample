@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemListEntry } from '../types/ItemOverviewTypes';
+import { ItemListEntry } from '../types/item-list-types';
 
 const ItemListItem = ({ item }: { item: ItemListEntry }) => {
   return (
