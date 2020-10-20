@@ -1,79 +1,9 @@
 import React, { createContext, useReducer } from 'react';
 import ApiReducer from './api-reducer';
-import {
-  ItemInfo,
-  ItemGroup,
-  ItemEntity,
-  TransportEvent,
-} from '../../types/raw-data-types';
-import {
-  ItemListForOverview,
-  Dimensions,
-  ItemType,
-  GroupType,
-  GenericListType,
-  ListEntryIsItem,
-  GetTotalItemAmountForList,
-} from '../../types/item-types';
 import { LocationType, EventType } from '../../types/enums';
 import { ApiStateType, ApiReducerAction } from '../../types/api-types';
 
 const initialState: ApiStateType = {
-  itemLists: [
-    {
-      currentLocation: LocationType.Storage,
-      plannedTime: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-      entries: [
-        {
-          infoId: 7,
-          name: 'Snowboard',
-          photo_url: 'https://www.placecage.com/800/400',
-          dimensions: { height: 20, width: 30, depth: 140 },
-          itemIds: [13],
-        },
-        {
-          groupId: 2,
-          name: 'Julpynt',
-          photo_url: 'https://www.placecage.com/c/200/100',
-          description: 'Allt vårt j*vla julpynt',
-          items: [
-            {
-              infoId: 8,
-              name: 'Julgran',
-              description: 'Plastgran i halvstorlek',
-              photo_url: 'https://www.placecage.com/c/200/300',
-              dimensions: { height: 20, width: 20, depth: 140 },
-              itemIds: [14],
-            },
-            {
-              infoId: 9,
-              name: 'Julgranspynt',
-              description: 'Flyttkartong med julgranspynt',
-              photo_url: 'http://www.placekitten.com/400/300',
-              dimensions: { height: 40, width: 30, depth: 60 },
-              itemIds: [15, 16],
-            },
-            {
-              infoId: 10,
-              name: 'Julbelysning (utomhus)',
-              description: 'Flyttkartong med julbelysning för utomhusbruk',
-              photo_url: 'http://www.placekitten.com/800/600',
-              dimensions: { height: 40, width: 30, depth: 60 },
-              itemIds: [17],
-            },
-          ],
-        },
-        {
-          infoId: 11,
-          name: 'Jultextilier',
-          description: 'Flyttkartong med juldukar, julgardiner o dyl',
-          photo_url: 'https://www.placecage.com/800/600',
-          dimensions: { height: 40, width: 30, depth: 60 },
-          itemIds: [18],
-        },
-      ],
-    },
-  ],
   itemInfos: [
     {
       id: 1,
@@ -114,40 +44,40 @@ const initialState: ApiStateType = {
       photo_url: 'https://www.placecage.com/c/1600/800',
       dimensions: { height: 120, width: 60, depth: 60 },
     },
-    // {
-    //   id: 7,
-    //   name: 'Snowboard',
-    //   photo_url: 'https://www.placecage.com/800/400',
-    //   dimensions: { height: 20, width: 30, depth: 140 },
-    // },
-    // {
-    //   id: 8,
-    //   name: 'Julgran',
-    //   description: 'Plastgran i halvstorlek',
-    //   photo_url: 'https://www.placecage.com/c/200/300',
-    //   dimensions: { height: 20, width: 20, depth: 140 },
-    // },
-    // {
-    //   id: 9,
-    //   name: 'Julgranspynt',
-    //   description: 'Flyttkartong med julgranspynt',
-    //   photo_url: 'http://www.placekitten.com/400/300',
-    //   dimensions: { height: 40, width: 30, depth: 60 },
-    // },
-    // {
-    //   id: 10,
-    //   name: 'Julbelysning (utomhus)',
-    //   description: 'Flyttkartong med julbelysning för utomhusbruk',
-    //   photo_url: 'http://www.placekitten.com/800/600',
-    //   dimensions: { height: 40, width: 30, depth: 60 },
-    // },
-    // {
-    //   id: 11,
-    //   name: 'Jultextilier',
-    //   description: 'Flyttkartong med juldukar, julgardiner o dyl',
-    //   photo_url: 'https://www.placecage.com/800/600',
-    //   dimensions: { height: 40, width: 30, depth: 60 },
-    // },
+    {
+      id: 7,
+      name: 'Snowboard',
+      photo_url: 'https://www.placecage.com/800/400',
+      dimensions: { height: 20, width: 30, depth: 140 },
+    },
+    {
+      id: 8,
+      name: 'Julgran',
+      description: 'Plastgran i halvstorlek',
+      photo_url: 'https://www.placecage.com/c/200/300',
+      dimensions: { height: 20, width: 20, depth: 140 },
+    },
+    {
+      id: 9,
+      name: 'Julgranspynt',
+      description: 'Flyttkartong med julgranspynt',
+      photo_url: 'http://www.placekitten.com/400/300',
+      dimensions: { height: 40, width: 30, depth: 60 },
+    },
+    {
+      id: 10,
+      name: 'Julbelysning (utomhus)',
+      description: 'Flyttkartong med julbelysning för utomhusbruk',
+      photo_url: 'http://www.placekitten.com/800/600',
+      dimensions: { height: 40, width: 30, depth: 60 },
+    },
+    {
+      id: 11,
+      name: 'Jultextilier',
+      description: 'Flyttkartong med juldukar, julgardiner o dyl',
+      photo_url: 'https://www.placecage.com/800/600',
+      dimensions: { height: 40, width: 30, depth: 60 },
+    },
     {
       id: 12,
       name: 'Cafébord',
@@ -176,12 +106,12 @@ const initialState: ApiStateType = {
     { id: 10, info_id: 6, location: LocationType.Home },
     { id: 11, info_id: 6, location: LocationType.Home },
     { id: 12, info_id: 6, location: LocationType.Home },
-    //{ id: 13, info_id: 7, location: LocationType.Storage },
-    //{ id: 14, info_id: 8, location: LocationType.Storage, group_id: 2 },
-    // { id: 15, info_id: 9, location: LocationType.Storage, group_id: 2 },
-    // { id: 16, info_id: 9, location: LocationType.Storage, group_id: 2 },
-    // { id: 17, info_id: 10, location: LocationType.Storage, group_id: 2 },
-    // { id: 18, info_id: 11, location: LocationType.Storage },
+    { id: 13, info_id: 7, location: LocationType.Storage },
+    { id: 14, info_id: 8, location: LocationType.Storage, group_id: 2 },
+    { id: 15, info_id: 9, location: LocationType.Storage, group_id: 2 },
+    { id: 16, info_id: 9, location: LocationType.Storage, group_id: 2 },
+    { id: 17, info_id: 10, location: LocationType.Storage, group_id: 2 },
+    { id: 18, info_id: 11, location: LocationType.Storage },
     { id: 19, info_id: 12, location: LocationType.Home },
     { id: 20, info_id: 12, location: LocationType.Home },
     { id: 21, info_id: 12, location: LocationType.Home },
@@ -211,32 +141,32 @@ const initialState: ApiStateType = {
       description:
         'Giraffen Lasse och de tillbehör som krävs för att ta hand om en giraff',
     },
-    // {
-    //   id: 2,
-    //   name: 'Julpynt',
-    //   photo_url: 'https://www.placecage.com/c/200/100',
-    //   description: 'Allt vårt j*vla julpynt',
-    // },
+    {
+      id: 2,
+      name: 'Julpynt',
+      photo_url: 'https://www.placecage.com/c/200/100',
+      description: 'Allt vårt j*vla julpynt',
+    },
   ],
   events: [
     {
       id: 1,
       type: EventType.Retrieval,
-      plannedTime: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
+      plannedTime: new Date(new Date().setMonth(new Date().getMonth() + 1)),
       item_ids: [13, 14, 15, 16, 17, 18],
     },
-    // {
-    //   id: 2,
-    //   type: EventType.Storage,
-    //   plannedTime: new Date(currentDate.setDate(currentDate.getDate() + 1)),
-    //   item_ids: [],
-    // },
-    // {
-    //   id: 3,
-    //   type: EventType.Storage,
-    //   plannedTime: new Date(currentDate.setDate(currentDate.getDate() + 5)),
-    //   item_ids: [],
-    // },
+    {
+      id: 2,
+      type: EventType.Storage,
+      plannedTime: new Date(new Date().setDate(new Date().getDate() + 1)),
+      item_ids: [],
+    },
+    {
+      id: 3,
+      type: EventType.Storage,
+      plannedTime: new Date(new Date().setDate(new Date().getDate() + 5)),
+      item_ids: [],
+    },
   ],
 };
 

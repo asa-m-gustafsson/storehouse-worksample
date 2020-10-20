@@ -1,7 +1,7 @@
 import React from 'react';
-import { ItemListEntry } from '../types/item-list-types';
+import { ItemType } from '../types/item-types';
 
-const ItemListItem = ({ item }: { item: ItemListEntry }) => {
+const ItemListItem = ({ item }: { item: ItemType }) => {
   return (
     <div className="c-item-card">
       <div className="c-item-card__left-wrapper">

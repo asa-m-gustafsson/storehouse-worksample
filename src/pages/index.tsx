@@ -30,23 +30,19 @@ const Index: Page = () => {
           <title>{title}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
-        <h1>TEST</h1>
+        <div className="c-button c-button--full-width">
+          <span className="c-button__text">Boka upphämtning</span>
+        </div>
+        <br />
+        <br />
+        <div className="c-button c-button--full-width c-button--pink">
+          <span className="c-button__text">Boka upphämtning</span>
+        </div>
+        <br />
+        <br />
+        <div className="c-button c-button--full-width c-button--teal">
+          <span className="c-button__text">Testknapp</span>
+        </div>
       </div>
     </div>
   );

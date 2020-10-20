@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ItemListEntry, GroupListEntry } from '../types/item-list-types';
+import { GroupType, GetTotalItemAmountForGroup } from '../types/item-types';
 import ItemListItem from './item-list-item';
 
 const ItemListGroup = ({
@@ -7,11 +7,10 @@ const ItemListGroup = ({
   expanded,
   toggleExpanded,
 }: {
-  group: GroupListEntry;
+  group: GroupType;
   expanded: boolean;
   toggleExpanded: (id: number) => void;
 }) => {
-  // const [expanded, setExpanded] = useState<boolean>(false);
   const cardRef = useRef(null);
 
   if (!group.items.length) {
@@ -22,7 +21,7 @@ const ItemListGroup = ({
     <div className="c-item-group">
       <div
         className="c-item-card c-item-card--group"
-        onClick={() => toggleExpanded(expanded ? 0 : group.id)}
+        onClick={() => toggleExpanded(expanded ? 0 : group.groupId)}
         ref={cardRef}
       >
         <div className="c-item-card__left-wrapper">
@@ -34,7 +33,7 @@ const ItemListGroup = ({
           </div>
           <span className="c-item-card__item-text">{group.name}&nbsp;</span>
           <span className="c-item-card__item-text c-item-card__item-text--details">
-            {` - Grupp (${group.items.length} kollin)`}
+            {` - Grupp (${GetTotalItemAmountForGroup(group)} kollin)`}
           </span>
         </div>
         <h1>{`>`}</h1>

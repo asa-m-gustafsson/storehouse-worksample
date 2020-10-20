@@ -14,7 +14,6 @@ import {
 } from './item-types';
 
 export type ApiStateType = {
-  itemLists: ItemListForOverview[];
   events: TransportEvent[];
   itemInfos: ItemInfo[];
   itemEntities: ItemEntity[];
