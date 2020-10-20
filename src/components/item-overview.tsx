@@ -3,12 +3,16 @@ import '../styles/item-overview.less';
 import ItemListItem from './item-list-item';
 import ItemListGroup from './item-list-group';
 import {
-  ItemList,
+  ItemListForOverview,
+  ItemListEntry,
+  GroupListEntry,
   GenericListEntry,
   ListEntryIsItem,
 } from '../types/item-list-types';
 import { LocationType, EventType } from '../types/enums';
 import { ApiContext } from './fake-api/api-context';
+import { ApiStateType } from '../types/api-types';
+import { ifError } from 'assert';
 
 const ItemOverview = ({ location }: { location: LocationType }) => {
   const { state, dispatch } = useContext(ApiContext);
@@ -17,7 +21,8 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
     day: 'numeric',
     month: 'long',
   });
-  const getHeadLine = (list: ItemList): string => {
+
+  const getHeadLine = (list: ItemListForOverview): string => {
     switch (location) {
       case LocationType.Home:
         return list.eventDate
@@ -61,12 +66,41 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
   );
 };
 
-const overviewList: ItemList[] = [
+const extractItemListFromState = (
+  location: LocationType,
+  state: ApiStateType
+): ItemListForOverview[] => {
+  const locatedItems = state.itemEntities.filter(
+    (ie) => ie.location === location
+  );
+  let returnList: ItemListForOverview[] = [];
+  // locatedItems.forEach(item=>{
+  //   const indexOfEventForItem = returnList.findIndex((event) => event.items.find(i => ))
+  // });
+  // let formattedItems: ItemListEntry[] = [];
+  // locatedItems.forEach((item) => {
+  //   const indexOfFormattedItem = formattedItems.findIndex((fi) =>
+  //     fi.itemIds.includes(item.id)
+  //   );
+  //   if (indexOfFormattedItem === -1) {
+  //     const itemInfo = state.itemInfos.find((info) => info.id === item.info_id);
+  //     formattedItems.push({
+  //       name: itemInfo.name,
+  //       photo_url: itemInfo.photo_url,
+  //       infoId: itemInfo.id,
+  //       itemIds: [item.id],
+  //     });
+  //   }
+  // });
+  return returnList;
+};
+
+const overviewList: ItemListForOverview[] = [
   {
     eventDate: new Date(),
     items: [
       {
-        uniqueIdentifier: 'guid',
+        infoId: 0,
         name: 'Verktygslåda',
         photo_url: 'https://www.placecage.com/c/400/800',
         itemIds: [1],
@@ -76,19 +110,19 @@ const overviewList: ItemList[] = [
         name: 'Giraff med Tillbehör',
         items: [
           {
-            uniqueIdentifier: 'guid',
+            infoId: 0,
             name: 'Giraff',
             photo_url: 'http://www.placekitten.com/400/800',
             itemIds: [9],
           },
           {
-            uniqueIdentifier: 'guid',
+            infoId: 0,
             name: 'Vattenskål',
             photo_url: 'http://www.placekitten.com/900/800',
             itemIds: [10],
           },
           {
-            uniqueIdentifier: 'guid',
+            infoId: 0,
             name: 'Giraffstrumpa',
             photo_url: 'https://www.placecage.com/200/100',
             itemIds: [11, 12, 13, 14],
@@ -96,13 +130,13 @@ const overviewList: ItemList[] = [
         ],
       },
       {
-        uniqueIdentifier: 'guid',
+        infoId: 0,
         name: 'Matbord',
         photo_url: 'https://www.placecage.com/c/800/400',
         itemIds: [3],
       },
       {
-        uniqueIdentifier: 'guid',
+        infoId: 0,
         name: 'Matsalsstol',
         itemIds: [4, 5, 6, 7],
       },
@@ -110,23 +144,23 @@ const overviewList: ItemList[] = [
   },
   {
     items: [
-      { uniqueIdentifier: 'guid', name: 'Snowboard', itemIds: [15] },
+      { infoId: 0, name: 'Snowboard', itemIds: [15] },
       {
         id: 16,
         name: 'Julpynt',
         items: [
           {
-            uniqueIdentifier: 'guid',
+            infoId: 0,
             name: 'Julgran',
             itemIds: [17, 20],
           },
-          { uniqueIdentifier: 'guid', name: 'Julgranspynt', itemIds: [18] },
+          { infoId: 0, name: 'Julgranspynt', itemIds: [18] },
           {
-            uniqueIdentifier: 'guid',
+            infoId: 0,
             name: 'Julbelysning (utomhus)',
             itemIds: [19],
           },
-          { uniqueIdentifier: 'guid', name: 'Juldukar', itemIds: [21] },
+          { infoId: 0, name: 'Juldukar', itemIds: [21] },
         ],
       },
     ],

@@ -5,13 +5,21 @@ import {
   ItemEntity,
   TransportEvent,
 } from './raw-data-types';
+import {
+  ItemListForOverview,
+  ItemType,
+  GroupType,
+  GenericListType,
+  ListEntryIsItem,
+} from './item-types';
 
-export type ApiStateType {
+export type ApiStateType = {
+  itemLists: ItemListForOverview[];
   events: TransportEvent[];
   itemInfos: ItemInfo[];
   itemEntities: ItemEntity[];
   itemGroups: ItemGroup[];
-}
+};
 
 interface IApiAddItemsToGroupAction {
   type: 'ADD_ITEMS_TO_GROUP';

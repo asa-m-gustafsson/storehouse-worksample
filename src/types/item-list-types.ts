@@ -1,14 +1,16 @@
 import { LocationType, EventType } from './enums';
 
-export interface ItemList {
+export interface ItemListForOverview {
   eventDate?: Date;
   items: GenericListEntry[];
+  totalItemAmount?: number;
 }
 
 export interface ItemListEntry {
   name: string;
   photo_url?: string;
-  uniqueIdentifier: string;
+  infoId: number;
+  uniqueIdentifier?: string;
   itemIds: number[];
 }
 
@@ -17,6 +19,7 @@ export interface GroupListEntry {
   photo_url?: string;
   id: number;
   items: ItemListEntry[];
+  totalItemAmount?: number;
 }
 
 export type GenericListEntry = GroupListEntry | ItemListEntry;
