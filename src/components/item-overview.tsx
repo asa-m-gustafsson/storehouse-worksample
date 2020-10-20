@@ -12,9 +12,9 @@ import {
   GetTotalItemAmountForList,
 } from '../types/item-types';
 import { LocationType, EventType } from '../types/enums';
-import { ApiContext } from './fake-api/api-context';
+import { ApiContext } from '../support/fake-api/api-context';
 import { ApiStateType } from '../types/api-types';
-import { extractItemListsFromState } from './fake-api/api-converters';
+import { extractItemListsFromState } from '../support/fake-api/api-converters';
 
 const ItemOverview = ({ location }: { location: LocationType }) => {
   const { state, dispatch } = useContext(ApiContext);
@@ -46,18 +46,19 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
 
   return (
     <div className="c-item-overview">
-      {overviewList.map((overview) => (
-        <div style={{ width: '100%', marginBottom: '8px' }}>
+      {overviewList.map((overview, viewIndex) => (
+        <div key={viewIndex} className="c-item-overview__subview">
           <div className="c-item-overview__headline">
             <span>{getHeadLine(overview)}</span>
             <span>{`${GetTotalItemAmountForList(overview)} saker`}</span>
           </div>
           <div className="c-item-list">
-            {overview.entries.map((entry) => {
+            {overview.entries.map((entry, entryIndex) => {
               return ListEntryIsItem(entry) ? (
-                <ItemListItem item={entry} />
+                <ItemListItem key={entryIndex} item={entry} />
               ) : (
                 <ItemListGroup
+                  key={entryIndex}
                   group={entry}
                   expanded={expandedGroupId === entry.groupId}
                   toggleExpanded={setExpandedGroupId}

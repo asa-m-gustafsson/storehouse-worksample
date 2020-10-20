@@ -1,7 +1,7 @@
 import '../styles/globals.less';
 import React from 'react';
 import App, { AppProps } from 'next/app';
-import { ApiProvider } from '../components/fake-api/api-context';
+import { ApiProvider } from '../support/fake-api/api-context';
 
 function MyApp({ Component, pageProps }) {
   console.log(pageProps);

@@ -52,8 +52,8 @@ const ItemListGroup = ({
             : { height: 0 }
         }
       >
-        {group.items.map((item) => (
-          <ItemListItem item={item} />
+        {group.items.map((item, entryIndex) => (
+          <ItemListItem key={entryIndex} item={item} />
         ))}
       </div>
     </div>
