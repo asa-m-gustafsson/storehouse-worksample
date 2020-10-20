@@ -18,13 +18,11 @@ import {
 import { LocationType, EventType } from '../../types/enums';
 import { ApiStateType, ApiReducerAction } from '../../types/api-types';
 
-const currentDate: Date = new Date();
-
 const initialState: ApiStateType = {
   itemLists: [
     {
       currentLocation: LocationType.Storage,
-      plannedTime: new Date(currentDate.setMonth(currentDate.getMonth() + 1)),
+      plannedTime: new Date(new Date().setMonth(new Date().getMonth() + 1)),
       entries: [
         {
           infoId: 7,

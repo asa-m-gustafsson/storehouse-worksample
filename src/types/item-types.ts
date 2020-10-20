@@ -2,7 +2,6 @@ import { LocationType, EventType } from './enums';
 
 export type ItemListForOverview = {
   plannedTime?: Date;
-  currentLocation: LocationType;
   entries: GenericListType[];
 };
 

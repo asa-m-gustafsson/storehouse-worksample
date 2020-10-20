@@ -12,7 +12,6 @@ import {
 import { LocationType, EventType } from '../types/enums';
 import { ApiContext } from './fake-api/api-context';
 import { ApiStateType } from '../types/api-types';
-import { ifError } from 'assert';
 
 const ItemOverview = ({ location }: { location: LocationType }) => {
   const { state, dispatch } = useContext(ApiContext);
