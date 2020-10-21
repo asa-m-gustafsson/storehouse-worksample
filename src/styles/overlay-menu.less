@@ -1,0 +1,44 @@
+@import 'variables.less';
+
+.c-overlay-menu {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 80;
+  &__backdrop {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  &__content-wrapper {
+    position: absolute;
+    min-width: 56px;
+    left: 0px;
+    top: 0px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    & > div {
+      margin: 16px;
+    }
+  }
+  &__button {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+    .shaded-div(@teal-color-hsl, 10%);
+    color: white;
+  }
+}

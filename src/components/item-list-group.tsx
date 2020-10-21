@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useReducer } from 'react';
+import { useRouter } from 'next/router';
 import { GroupType, GetTotalItemAmountForGroup } from '../types/item-types';
 import ItemListItem from './item-list-item';
+import useLongPress from '../support/hooks/use-long-press';
+import OverlayMenu from './overlay-menu';
 
 const ItemListGroup = ({
   group,
@@ -11,17 +14,50 @@ const ItemListGroup = ({
   expanded: boolean;
   toggleExpanded: (id: number) => void;
 }) => {
-  const cardRef = useRef(null);
-
   if (!group.items.length) {
     return null;
   }
+  const [popupState, setPopupState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { showPopup: false, clientX: 0, clientY: 0 }
+  );
+  const cardRef = useRef(null);
+  const router = useRouter();
+  var popupBtnContainerMaxWidth = 200;
+
+  const handleClick = () => {
+    toggleExpanded(expanded ? 0 : group.groupId);
+  };
+  const handleLongPress = (e, xValue, yValue) => {
+    var sanitizedXValue = Math.min(
+      (cardRef?.current?.offsetWidth ?? 0) - popupBtnContainerMaxWidth / 2,
+      Math.max(popupBtnContainerMaxWidth / 2, xValue)
+    );
+    setPopupState({
+      showPopup: true,
+      clientX: xValue,
+      clientY: yValue,
+    });
+  };
+  const longPressEvent = useLongPress(handleLongPress, handleClick, {
+    shouldPreventDefault: true,
+    delay: 1000,
+  });
 
   return (
     <div className="c-item-group">
+      <OverlayMenu
+        show={popupState.showPopup}
+        middlePointX={popupState.clientX}
+        middlePointY={popupState.clientY}
+        maxWidth={popupBtnContainerMaxWidth}
+        handleClose={() => setPopupState({ showPopup: false })}
+      >
+        <div className="c-overlay-menu__button"></div>
+      </OverlayMenu>
       <div
         className="c-item-card c-item-card--group"
-        onClick={() => toggleExpanded(expanded ? 0 : group.groupId)}
+        {...longPressEvent}
         ref={cardRef}
       >
         <div className="c-item-card__left-wrapper">

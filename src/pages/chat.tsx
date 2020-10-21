@@ -1,27 +1,27 @@
 import React, { ReactNode } from 'react';
-import { NextPage } from 'next';
 import Head from 'next/head';
+import '../styles/index.less';
 import StandardLayout from '../components/layout/standard-layout';
-import ItemOverview from '../components/item-overview';
-import { LocationType } from '../types/enums';
+import { NextPage } from 'next';
 
 type Page = NextPage & {
   Layout?: (props: { children?: ReactNode }) => JSX.Element;
 };
 
-const Storage: Page = () => {
-  const title: string = 'Vinden';
+const Chat: Page = () => {
+  const title: string = 'Chatt';
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ItemOverview location={LocationType.Storage} />
+      <p style={{ margin: '16px' }}>Ingen vill prata med dig.</p>
     </>
   );
 };
 
-Storage.Layout = StandardLayout;
+Chat.Layout = StandardLayout;
 
-export default Storage;
+export default Chat;

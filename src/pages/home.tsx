@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Layout from '../components/layout/layout';
+import StandardLayout from '../components/layout/standard-layout';
 import ItemOverview from '../components/item-overview';
 import { LocationType } from '../types/enums';
 
@@ -22,6 +22,6 @@ const Home: Page = () => {
   );
 };
 
-Home.Layout = Layout;
+Home.Layout = StandardLayout;
 
 export default Home;
