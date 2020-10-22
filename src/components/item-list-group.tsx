@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react';
+import React, { useRef, useReducer } from 'react';
 import { useRouter } from 'next/router';
 import { GroupType, GetTotalItemAmountForGroup } from '../types/item-types';
 import ItemListItem from './item-list-item';
 import useLongPress from '../support/hooks/use-long-press';
 import OverlayMenu from './overlay-menu';
 import OverlayButton, { OverlayButtonType } from './overlay-button';
+import { SvgType, getSvg } from '../support/get-svg';
 
 const ItemListGroup = ({
   group,
@@ -24,19 +25,14 @@ const ItemListGroup = ({
   );
   const cardRef = useRef(null);
   const router = useRouter();
-  var popupBtnContainerMaxWidth = 280;
 
   const handleClick = () => {
     toggleExpanded(expanded ? 0 : group.groupId);
   };
   const handleLongPress = (e, xValue, yValue) => {
-    var sanitizedXValue = Math.min(
-      (cardRef?.current?.offsetWidth ?? 0) - popupBtnContainerMaxWidth / 2,
-      Math.max(popupBtnContainerMaxWidth / 2, xValue)
-    );
     setPopupState({
       showPopup: true,
-      clientX: sanitizedXValue,
+      clientX: xValue,
       clientY: yValue,
     });
   };
@@ -46,68 +42,75 @@ const ItemListGroup = ({
   });
 
   return (
-    <div className="c-item-group">
+    <>
+      <div className="c-item-group">
+        <div
+          className="c-item-card c-item-card--group"
+          {...longPressEvent}
+          ref={cardRef}
+        >
+          <div className="c-item-card__left-wrapper">
+            <div className="c-item-card__picture">
+              <img
+                src={group.photo_url ?? 'https://www.placecage.com/c/200/300'}
+                alt={group.name}
+              />
+            </div>
+            <div>
+              <p className="c-item-card__item-text">{group.name}</p>
+              <p className="c-item-card__item-text c-item-card__item-text--details">
+                {`Grupp (${GetTotalItemAmountForGroup(group)} kollin)`}
+              </p>
+            </div>
+          </div>
+          <div
+            className={`c-item-card__chevron${
+              expanded ? ' c-item-card__chevron--expanded' : ''
+            }`}
+          >
+            {getSvg(SvgType.Expand)}
+          </div>
+        </div>
+        <div
+          className="c-item-group__list"
+          style={
+            expanded
+              ? {
+                  height: `${
+                    (cardRef?.current?.offsetHeight ?? 0) * group.items.length
+                  }px`,
+                }
+              : { height: 0 }
+          }
+        >
+          {group.items.map((item, entryIndex) => (
+            <ItemListItem key={entryIndex} item={item} />
+          ))}
+        </div>
+      </div>
       <OverlayMenu
         show={popupState.showPopup}
         middlePointX={popupState.clientX}
         middlePointY={popupState.clientY}
-        maxWidth={popupBtnContainerMaxWidth}
         handleClose={() => setPopupState({ showPopup: false })}
       >
         <OverlayButton
+          type={OverlayButtonType.ShipGroup}
+          location={group.items[0].location}
+          handleClick={() => console.log('Not implemented!')}
+        />
+        <OverlayButton
           type={OverlayButtonType.ViewGroup}
           location={group.items[0].location}
-          onClick={() => console.log('viewGroup!')}
+          handleClick={() => console.log('viewGroup!')}
         />
         <OverlayButton
           type={OverlayButtonType.EditGroup}
           location={group.items[0].location}
-          onClick={() => console.log('editGroup!')}
-        />
-        <OverlayButton
-          type={OverlayButtonType.ShipGroup}
-          location={group.items[0].location}
-          onClick={() => console.log('shipGroup!')}
+          handleClick={() => console.log('editGroup!')}
         />
       </OverlayMenu>
-      <div
-        className="c-item-card c-item-card--group"
-        {...longPressEvent}
-        ref={cardRef}
-      >
-        <div className="c-item-card__left-wrapper">
-          <div className="c-item-card__picture">
-            <img
-              src={group.photo_url ?? 'https://www.placecage.com/c/200/300'}
-              alt={group.name}
-            />
-          </div>
-          <span className="c-item-card__item-text">{group.name}&nbsp;</span>
-          <span className="c-item-card__item-text c-item-card__item-text--details">
-            {` - Grupp (${GetTotalItemAmountForGroup(group)} kollin)`}
-          </span>
-        </div>
-        <h1>{`>`}</h1>
-      </div>
-      <div
-        className={`c-item-group__list${
-          expanded ? ' c-item-group__list--expanded' : ''
-        }`}
-        style={
-          expanded
-            ? {
-                height: `${
-                  (cardRef?.current?.offsetHeight ?? 0) * group.items.length
-                }px`,
-              }
-            : { height: 0 }
-        }
-      >
-        {group.items.map((item, entryIndex) => (
-          <ItemListItem key={entryIndex} item={item} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -1,21 +1,30 @@
-import React, { useState, useRef, useEffect, useReducer } from 'react';
+import React, { useState } from 'react';
+import useWindowSize from '../support/hooks/use-window-size';
 import '../styles/overlay-menu.less';
 
 const OverlayMenu = ({
   show,
   middlePointX,
   middlePointY,
-  maxWidth,
   handleClose,
   children,
 }: {
   show: boolean;
   middlePointX: number;
   middlePointY: number;
-  maxWidth: number;
   handleClose: () => void;
   children?: React.ReactNode;
 }) => {
+  const size = useWindowSize();
+
+  const contentWidth = 200;
+  const sanitizedXPoint =
+    Math.min(
+      size.width - contentWidth / 2, // largest allowed middlePointX
+      Math.max(contentWidth / 2, middlePointX) // smallest allowed middlePointX
+    ) -
+    contentWidth / 2; // subtract half content-width so that middle is in actual middle
+
   return (
     <>
       <div
@@ -24,15 +33,16 @@ const OverlayMenu = ({
       >
         <div
           className="c-overlay-menu__backdrop"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             handleClose();
           }}
         >
           <div
             className="c-overlay-menu__content-wrapper"
             style={{
-              maxWidth: `${maxWidth}px`,
-              left: `${middlePointX}px`,
+              width: `${contentWidth}px`,
+              left: `${sanitizedXPoint}px`,
               top: `${middlePointY}px`,
             }}
           >

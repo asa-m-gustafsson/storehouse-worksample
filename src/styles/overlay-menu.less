@@ -6,32 +6,40 @@
   right: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: 80;
   &__backdrop {
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
   }
   &__content-wrapper {
     position: absolute;
     min-width: 104px;
     left: 0px;
     top: 0px;
-    transform: translate(-50%, -50%);
+    transform: translate(0, -50%);
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: flex-start;
 
     & > div {
-      margin: 16px;
+      margin: 8px 0;
     }
   }
-  &__button {
+  &__button-wrapper {
     width: 72px;
     height: 72px;
+    padding: 0;
+    border: 6px @teal-color;
+    border-radius: 20%;
+    //.shaded-div(@teal-color-hsl, 10%);
+    box-shadow: 1px 1px 4px @gray-color;
+  }
+  &__button {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;

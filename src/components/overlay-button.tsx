@@ -16,11 +16,11 @@ export enum OverlayButtonType {
 const OverlayButton = ({
   type,
   location,
-  onClick,
+  handleClick,
 }: {
   type: OverlayButtonType;
   location: LocationType;
-  onClick: () => void;
+  handleClick: () => void;
 }) => {
   const getButtonIcon = (): JSX.Element => {
     switch (type) {
@@ -43,34 +43,42 @@ const OverlayButton = ({
   const getButtonText = (): string => {
     switch (type) {
       case OverlayButtonType.ViewGroup:
-        return 'Visa Grupp';
+        return 'Visa grupp';
       case OverlayButtonType.ViewItem:
-        return 'Visa Kolli';
+        return 'Visa kolli';
       case OverlayButtonType.EditGroup:
-        return 'Redigera Grupp';
+        return 'Redigera grupp';
       case OverlayButtonType.EditItem:
-        return 'Redigera Kolli';
+        return 'Redigera kolli';
       case OverlayButtonType.ShipGroup:
       case OverlayButtonType.ShipItem:
         switch (location) {
           case LocationType.Home:
-            return 'Beställ Upphämntning';
+            return 'Beställ upphämntning';
           case LocationType.Storage:
           default:
-            return 'Beställ Hemkörning';
+            return 'Beställ hemkörning';
         }
       case OverlayButtonType.AddItemToGroup:
-        return 'Lägg till i Grupp';
+        return 'Lägg till i befintlig grupp';
       case OverlayButtonType.AddItemToNewGroup:
-        return 'Skapa och lägg till i Ny Grupp';
+        return 'Lägg till i ny grupp';
       default:
         return '';
     }
   };
   return (
-    <div className="c-overlay-menu__button">
-      {getButtonIcon()}
-      <span>{getButtonText()}</span>
+    <div className="c-overlay-menu__button-wrapper">
+      <div
+        className="c-overlay-menu__button"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClick();
+        }}
+      >
+        {getButtonIcon()}
+        <span>{getButtonText()}</span>
+      </div>
     </div>
   );
 };
