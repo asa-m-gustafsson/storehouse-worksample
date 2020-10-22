@@ -1,33 +1,26 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/item-overview.less';
 import ItemListItem from './item-list-item';
 import ItemListGroup from './item-list-group';
 import {
   ItemListForOverview,
-  ItemType,
-  GroupType,
-  GenericListType,
   ListEntryIsItem,
-  GetTotalItemAmountForGroup,
   GetTotalItemAmountForList,
 } from '../types/item-types';
-import { LocationType, EventType } from '../types/enums';
-import { ApiContext } from '../support/fake-api/api-context';
-import { ApiStateType } from '../types/api-types';
-import { extractItemListsFromState } from '../support/fake-api/api-converters';
+import { LocationType } from '../types/enums';
 
-const ItemOverview = ({ location }: { location: LocationType }) => {
-  const { state, dispatch } = useContext(ApiContext);
+const ItemOverview = ({
+  location,
+  lists,
+}: {
+  location: LocationType;
+  lists: ItemListForOverview[];
+}) => {
   const [expandedGroupId, setExpandedGroupId] = useState(0);
-  const [overviewList, setOverviewList] = useState<ItemListForOverview[]>([]);
   const dateFormat = new Intl.DateTimeFormat('sv-SE', {
     day: 'numeric',
     month: 'long',
   });
-
-  useEffect(() => {
-    setOverviewList(extractItemListsFromState(location, state));
-  }, [state]);
 
   const getHeadLine = (list: ItemListForOverview): string => {
     switch (location) {
@@ -46,7 +39,7 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
 
   return (
     <div className="c-item-overview">
-      {overviewList.map((overview, viewIndex) => (
+      {lists.map((overview, viewIndex) => (
         <div key={viewIndex} className="c-item-overview__subview">
           <div className="c-item-overview__headline">
             <span>{getHeadLine(overview)}</span>
@@ -55,7 +48,7 @@ const ItemOverview = ({ location }: { location: LocationType }) => {
           <div className="c-item-list">
             {overview.entries.map((entry, entryIndex) => {
               return ListEntryIsItem(entry) ? (
-                <ItemListItem key={entryIndex} item={entry} />
+                <ItemListItem key={entryIndex} item={entry} hasGroup={false} />
               ) : (
                 <ItemListGroup
                   key={entryIndex}

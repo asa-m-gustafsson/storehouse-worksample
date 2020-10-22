@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import '../../styles/layout.less';
 import { useRouter } from 'next/router';
+import { SvgType, getSvg } from '../../support/get-svg';
 
 const BackLinkLayout = (props: { children: ReactNode }) => {
   const router = useRouter();
@@ -10,7 +11,7 @@ const BackLinkLayout = (props: { children: ReactNode }) => {
         className="c-layout__back-arrow-wrapper"
         onClick={() => router.back()}
       >
-        <h1>BAK</h1>
+        {getSvg(SvgType.BackLink)}
       </div>
       <div className="c-layout__content c-layout__content--back-link">
         {props.children}

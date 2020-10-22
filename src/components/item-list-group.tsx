@@ -50,8 +50,9 @@ const ItemListGroup = ({
           ref={cardRef}
         >
           <div className="c-item-card__left-wrapper">
-            <div className="c-item-card__picture">
+            <div className="c-item-card__picture-wrapper">
               <img
+                className="c-item-card__picture"
                 src={group.photo_url ?? 'https://www.placecage.com/c/200/300'}
                 alt={group.name}
               />
@@ -84,7 +85,7 @@ const ItemListGroup = ({
           }
         >
           {group.items.map((item, entryIndex) => (
-            <ItemListItem key={entryIndex} item={item} />
+            <ItemListItem key={entryIndex} item={item} hasGroup={true} />
           ))}
         </div>
       </div>
@@ -102,12 +103,22 @@ const ItemListGroup = ({
         <OverlayButton
           type={OverlayButtonType.ViewGroup}
           location={group.items[0].location}
-          handleClick={() => console.log('viewGroup!')}
+          handleClick={() =>
+            router.push({
+              pathname: '/group',
+              query: { groupId: group.groupId },
+            })
+          }
         />
         <OverlayButton
           type={OverlayButtonType.EditGroup}
           location={group.items[0].location}
-          handleClick={() => console.log('editGroup!')}
+          handleClick={() =>
+            router.push({
+              pathname: '/group',
+              query: { groupId: group.groupId, edit: true },
+            })
+          }
         />
       </OverlayMenu>
     </>

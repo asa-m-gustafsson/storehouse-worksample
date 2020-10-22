@@ -6,7 +6,13 @@ import useLongPress from '../support/hooks/use-long-press';
 import OverlayMenu from './overlay-menu';
 import OverlayButton, { OverlayButtonType } from './overlay-button';
 
-const ItemListItem = ({ item }: { item: ItemType }) => {
+const ItemListItem = ({
+  item,
+  hasGroup,
+}: {
+  item: ItemType;
+  hasGroup: boolean;
+}) => {
   const [popupState, setPopupState] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     { showPopup: false, clientX: 0, clientY: 0 }
@@ -30,8 +36,9 @@ const ItemListItem = ({ item }: { item: ItemType }) => {
     <>
       <div className="c-item-card" {...longPressEvent}>
         <div className="c-item-card__left-wrapper">
-          <div className="c-item-card__picture">
+          <div className="c-item-card__picture-wrapper">
             <img
+              className="c-item-card__picture"
               src={item.photo_url ?? 'https://www.placecage.com/c/200/300'}
               alt={item.name}
             />
@@ -54,16 +61,18 @@ const ItemListItem = ({ item }: { item: ItemType }) => {
           location={item.location}
           handleClick={() => console.log('Not implemented!')}
         />
-        <OverlayButton
-          type={OverlayButtonType.AddItemToGroup}
-          location={item.location}
-          handleClick={() => console.log('AddItemToExistingGroup')}
-        />
-        <OverlayButton
-          type={OverlayButtonType.AddItemToNewGroup}
-          location={item.location}
-          handleClick={() => console.log('editItem!')}
-        />
+        {!hasGroup && (
+          <OverlayButton
+            type={OverlayButtonType.AddItemToNewGroup}
+            location={item.location}
+            handleClick={() =>
+              router.push({
+                pathname: '/group',
+                query: { itemIdsToAdd: item.itemIds },
+              })
+            }
+          />
+        )}
       </OverlayMenu>
     </>
   );

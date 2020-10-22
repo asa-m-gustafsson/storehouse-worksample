@@ -51,7 +51,7 @@
     flex-wrap: nowrap;
     align-items: center;
   }
-  &__picture {
+  &__picture-wrapper {
     // border: 2px solid @gray-color;
     // doing a non-blurred box shadow instead of border removes gap issue
     box-shadow: 0 0 0 2px @gray-color;
@@ -62,8 +62,8 @@
     overflow: hidden;
     position: relative;
 
-    img {
-      // ensure that image fills entire container and maintains aspect ratio,
+    .c-item-card__picture {
+      // ensure that image fills entire container and maintains aspect ratio
       min-width: 100%;
       min-height: 100%;
       width: 100%;
@@ -97,6 +97,9 @@
   &--group {
     .shaded-div(@teal-color, 2%);
     .c-item-card {
+      &__picture-wrapper {
+        box-shadow: 0 0 0 2px lighten(@teal-color, 20%);
+      }
       &__item-text {
         &--details {
           color: white;

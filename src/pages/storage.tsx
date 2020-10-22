@@ -4,6 +4,7 @@ import Head from 'next/head';
 import StandardLayout from '../components/layout/standard-layout';
 import ItemOverview from '../components/item-overview';
 import { LocationType } from '../types/enums';
+import getItemLists from '../support/hooks/get-item-lists';
 
 type Page = NextPage & {
   Layout?: (props: { children?: ReactNode }) => JSX.Element;
@@ -11,13 +12,14 @@ type Page = NextPage & {
 
 const Storage: Page = () => {
   const title: string = 'Vinden';
+  const itemLists = getItemLists(LocationType.Storage);
   return (
     <>
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ItemOverview location={LocationType.Storage} />
+      <ItemOverview location={LocationType.Storage} lists={itemLists} />
     </>
   );
 };

@@ -17,12 +17,85 @@ import { LocationType, EventType } from '../../types/enums';
 
 // NOTE: There is A LOT of copy-pasted code here. In the future, break out into functions!
 
+export const extractSingleGroupFromState = (
+  state: ApiStateType,
+  groupId: number
+): GroupType => {
+  const locatedRawGroup = state.itemGroups.find((ig) => ig.id === groupId);
+  if (!locatedRawGroup) return undefined;
+
+  const locatedGroupedItems = state.itemEntities.filter(
+    (ie) => ie.group_id === groupId
+  );
+
+  return {
+    groupId: locatedRawGroup.id,
+    name: locatedRawGroup.name,
+    description: locatedRawGroup.description,
+    photo_url: locatedRawGroup.photo_url,
+    items: convertRawItemsToItemTypeArray(state, locatedGroupedItems),
+  };
+};
+
+export const extractGroupCandidateItemsFromState = (
+  state: ApiStateType,
+  sampleItemId: number
+): ItemType[] => {
+  // NOTE! This works on the premise that all items in a group can only exist at the same place, and be shipped together.
+  const sampleItem = state.itemEntities.find((ie) => ie.id === sampleItemId);
+  // if we can't find this item, we have no idea what location/transport event to select candidates from, which makes all of this useless.
+  if (!sampleItem) {
+    return undefined;
+  }
+  const eventToSelectFrom = state.events.find(
+    (e) => e.plannedTime > new Date() && e.item_ids.includes(sampleItemId)
+  );
+
+  const rawItemPool = state.itemEntities.filter((ie) => {
+    return (
+      ie.location === sampleItem.location &&
+      !ie.group_id &&
+      (!eventToSelectFrom || eventToSelectFrom.item_ids.includes(ie.id))
+    );
+  });
+
+  return convertRawItemsToItemTypeArray(state, rawItemPool);
+};
+
+export const convertRawItemsToItemTypeArray = (
+  state: ApiStateType,
+  items: ItemEntity[]
+): ItemType[] => {
+  // NOTE! This function does not take groups into account.
+  // Only use for items you KNOW are not grouped, or all belong to the same group
+  let returnArray: ItemType[] = [];
+
+  items.forEach((item) => {
+    let existingItemType = returnArray.find((gi) => gi.infoId === item.info_id);
+    if (!existingItemType) {
+      const infoForItem = state.itemInfos.find((ii) => ii.id === item.info_id);
+      returnArray.push({
+        infoId: item.info_id,
+        name: infoForItem.name,
+        description: infoForItem.description,
+        photo_url: infoForItem.photo_url,
+        dimensions: infoForItem.dimensions,
+        location: item.location,
+        itemIds: [item.id],
+      });
+    } else {
+      existingItemType.itemIds.push(item.id);
+    }
+  });
+
+  return returnArray;
+};
+
 export const extractItemListsFromState = (
   location: LocationType,
   state: ApiStateType
 ): ItemListForOverview[] => {
   // empty list to collect all overviewList
-  console.log('extract item lists from state');
   let returnList: ItemListForOverview[] = [];
 
   // all raw item entities in specified location.
@@ -59,6 +132,7 @@ export const extractItemListsFromState = (
       );
     });
     // ... and for each item in sub-list, format group/item-types or add to existing ones.
+    // Restructuring needed to be able to extract this function into smaller pieces.
     rawItemsForEvent.forEach((rawItem) => {
       if (rawItem.group_id) {
         // item belongs in a group. Find group and add item to it, or create new group with item.
