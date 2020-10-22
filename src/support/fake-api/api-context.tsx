@@ -68,7 +68,7 @@ const initialState: ApiStateType = {
       id: 10,
       name: 'Julbelysning (utomhus)',
       description: 'Flyttkartong med julbelysning för utomhusbruk',
-      photo_url: 'http://www.placekitten.com/800/600',
+      photo_url: 'http://www.placekitten.com/900/600',
       dimensions: { height: 40, width: 30, depth: 60 },
     },
     {
@@ -91,6 +91,13 @@ const initialState: ApiStateType = {
       description: 'Stol i metall, för uteserveringar på caféer',
       photo_url: 'https://www.placecage.com/600/400',
       dimensions: { height: 100, width: 70, depth: 70 },
+    },
+    {
+      id: 14,
+      name: 'Laserkanon',
+      description: 'Med fäste anpassat för giraff',
+      photo_url: 'https://www.placecage.com/c/300/500',
+      dimensions: { height: 80, width: 110, depth: 120 },
     },
   ],
   itemEntities: [
@@ -133,6 +140,7 @@ const initialState: ApiStateType = {
     { id: 37, info_id: 13, location: LocationType.Storage },
     { id: 38, info_id: 13, location: LocationType.Storage },
     { id: 39, info_id: 13, location: LocationType.Storage },
+    { id: 40, info_id: 14, location: LocationType.Storage, group_id: 1 },
   ],
   itemGroups: [
     {

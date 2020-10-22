@@ -4,6 +4,7 @@ import { GroupType, GetTotalItemAmountForGroup } from '../types/item-types';
 import ItemListItem from './item-list-item';
 import useLongPress from '../support/hooks/use-long-press';
 import OverlayMenu from './overlay-menu';
+import OverlayButton, { OverlayButtonType } from './overlay-button';
 
 const ItemListGroup = ({
   group,
@@ -23,7 +24,7 @@ const ItemListGroup = ({
   );
   const cardRef = useRef(null);
   const router = useRouter();
-  var popupBtnContainerMaxWidth = 200;
+  var popupBtnContainerMaxWidth = 280;
 
   const handleClick = () => {
     toggleExpanded(expanded ? 0 : group.groupId);
@@ -35,13 +36,13 @@ const ItemListGroup = ({
     );
     setPopupState({
       showPopup: true,
-      clientX: xValue,
+      clientX: sanitizedXValue,
       clientY: yValue,
     });
   };
   const longPressEvent = useLongPress(handleLongPress, handleClick, {
     shouldPreventDefault: true,
-    delay: 1000,
+    delay: 500,
   });
 
   return (
@@ -53,7 +54,21 @@ const ItemListGroup = ({
         maxWidth={popupBtnContainerMaxWidth}
         handleClose={() => setPopupState({ showPopup: false })}
       >
-        <div className="c-overlay-menu__button"></div>
+        <OverlayButton
+          type={OverlayButtonType.ViewGroup}
+          location={group.items[0].location}
+          onClick={() => console.log('viewGroup!')}
+        />
+        <OverlayButton
+          type={OverlayButtonType.EditGroup}
+          location={group.items[0].location}
+          onClick={() => console.log('editGroup!')}
+        />
+        <OverlayButton
+          type={OverlayButtonType.ShipGroup}
+          location={group.items[0].location}
+          onClick={() => console.log('shipGroup!')}
+        />
       </OverlayMenu>
       <div
         className="c-item-card c-item-card--group"

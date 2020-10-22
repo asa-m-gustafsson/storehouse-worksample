@@ -15,6 +15,8 @@ import {
 import { ApiStateType } from '../../types/api-types';
 import { LocationType, EventType } from '../../types/enums';
 
+// NOTE: There is A LOT of copy-pasted code here. In the future, break out into functions!
+
 export const extractItemListsFromState = (
   location: LocationType,
   state: ApiStateType
@@ -81,6 +83,7 @@ export const extractItemListsFromState = (
               description: infoForRawItem.description,
               photo_url: infoForRawItem.photo_url,
               dimensions: infoForRawItem.dimensions,
+              location: rawItem.location,
               itemIds: [rawItem.id],
             });
           }
@@ -104,6 +107,7 @@ export const extractItemListsFromState = (
                 description: infoForRawItem.description,
                 photo_url: infoForRawItem.photo_url,
                 dimensions: infoForRawItem.dimensions,
+                location: rawItem.location,
                 itemIds: [rawItem.id],
               },
             ],
@@ -126,6 +130,7 @@ export const extractItemListsFromState = (
             description: infoForRawItem.description,
             photo_url: infoForRawItem.photo_url,
             dimensions: infoForRawItem.dimensions,
+            location: rawItem.location,
             itemIds: [rawItem.id],
           });
         }
@@ -169,6 +174,7 @@ export const extractItemListsFromState = (
             description: infoForRawItem.description,
             photo_url: infoForRawItem.photo_url,
             dimensions: infoForRawItem.dimensions,
+            location: rawItem.location,
             itemIds: [rawItem.id],
           });
         }
@@ -192,6 +198,7 @@ export const extractItemListsFromState = (
               description: infoForRawItem.description,
               photo_url: infoForRawItem.photo_url,
               dimensions: infoForRawItem.dimensions,
+              location: rawItem.location,
               itemIds: [rawItem.id],
             },
           ],
@@ -214,6 +221,7 @@ export const extractItemListsFromState = (
           description: infoForRawItem.description,
           photo_url: infoForRawItem.photo_url,
           dimensions: infoForRawItem.dimensions,
+          location: rawItem.location,
           itemIds: [rawItem.id],
         });
       }

@@ -17,6 +17,7 @@ export type ItemType = {
   description?: string;
   photo_url?: string;
   dimensions: Dimensions;
+  location: LocationType;
   itemIds: number[];
 };
 
