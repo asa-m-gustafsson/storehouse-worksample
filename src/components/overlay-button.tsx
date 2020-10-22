@@ -54,7 +54,7 @@ const OverlayButton = ({
       case OverlayButtonType.ShipItem:
         switch (location) {
           case LocationType.Home:
-            return 'Beställ upphämntning';
+            return 'Beställ hämtning';
           case LocationType.Storage:
           default:
             return 'Beställ hemkörning';

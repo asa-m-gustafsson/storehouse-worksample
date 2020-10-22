@@ -1,18 +1,10 @@
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import BackLinkLayout from '../components/layout/backlink-layout';
-import {
-  ItemListForOverview,
-  ItemType,
-  GroupType,
-  GenericListType,
-  ListEntryIsItem,
-  GetTotalItemAmountForGroup,
-  GetTotalItemAmountForList,
-} from '../types/item-types';
 import GroupView from '../components/group-view';
+import getItemGroup from '../support/hooks/get-item-group';
 
 type Page = NextPage & {
   Layout?: (props: { children?: ReactNode }) => JSX.Element;
@@ -23,9 +15,9 @@ const Group: Page = () => {
   console.log(router.query);
 
   const title: string = `Grupp`;
-  // NOTE this does not guard against multiple group-ids being entered.
-  const groupId = Number(router.query?.groupId);
-
+  // NOTE this number conversion does not guard against multiple group-ids being entered.
+  // however, inserting NaN, 0, undefined just results in an empty group.
+  const group = getItemGroup(Number(router.query?.groupId));
   const itemIdsToAdd = (router.query?.itemIdsToAdd
     ? Array.isArray(router.query.itemIdsToAdd)
       ? router.query.itemIdsToAdd
@@ -42,8 +34,8 @@ const Group: Page = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <GroupView
-        groupId={groupId}
-        openOnEdit={router.query?.edit === 'true'}
+        group={group}
+        openOnEdit={router.query?.edit === 'true' || !group.groupId}
         itemIdsToAdd={itemIdsToAdd}
       />
     </>
