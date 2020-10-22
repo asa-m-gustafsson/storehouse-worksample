@@ -43,7 +43,7 @@ export const extractGroupCandidateItemsFromState = (
 ): ItemType[] => {
   // NOTE! This works on the premise that all items in a group can only exist at the same place, and be shipped together.
   const sampleItem = state.itemEntities.find((ie) => ie.id === sampleItemId);
-  console.log(sampleItem);
+
   // if we can't find this item, we have no idea what location/transport event to select candidates from, which makes all of this useless.
   if (!sampleItem) {
     return [];
@@ -51,7 +51,6 @@ export const extractGroupCandidateItemsFromState = (
   const eventToSelectFrom = state.events.find(
     (e) => e.plannedTime > new Date() && e.item_ids.includes(sampleItemId)
   );
-  console.log(eventToSelectFrom);
   const rawItemPool = state.itemEntities.filter((ie) => {
     return (
       ie.location === sampleItem.location &&
@@ -59,8 +58,6 @@ export const extractGroupCandidateItemsFromState = (
       (!eventToSelectFrom || eventToSelectFrom.item_ids.includes(ie.id))
     );
   });
-  console.log(rawItemPool);
-
   return convertRawItemsToItemTypeArray(state, rawItemPool);
 };
 

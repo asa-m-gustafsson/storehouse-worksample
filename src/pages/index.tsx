@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import Head from 'next/head';
 import '../styles/index.less';
 import StandardLayout from '../components/layout/standard-layout';
@@ -9,18 +9,6 @@ type Page = NextPage & {
 };
 
 const Index: Page = () => {
-  const [testVar, setTestVar] = useState('');
-
-  useEffect(() => {
-    const url = '/api/hello';
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        console.log(JSON.parse(JSON.stringify(json)));
-      });
-  }, []);
-
   const title: string = 'Vinden';
 
   return (

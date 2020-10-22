@@ -19,7 +19,7 @@ const ItemListItem = ({
   );
   const router = useRouter();
   const handleClick = () => {
-    console.log('item clicked!');
+    console.log('not implemented!');
   };
   const handleLongPress = (e, xValue, yValue) => {
     setPopupState({

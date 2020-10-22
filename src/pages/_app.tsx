@@ -3,7 +3,6 @@ import React from 'react';
 import { ApiProvider } from '../support/fake-api/api-context';
 
 function MyApp({ Component, pageProps }) {
-  console.log(pageProps);
   const CurrentLayout = Component.Layout ? Component.Layout : React.Fragment;
 
   return (
