@@ -32,18 +32,22 @@ const GroupView = ({
     { groupId: 0, name: '', description: '', photo_url: '', items: [] }
   );
   useEffect(() => {
-    console.log('changing group.');
-    setEditedGroup({ ...group });
+    const copyOfGroup: GroupType = JSON.parse(JSON.stringify(group));
+    setEditedGroup(copyOfGroup);
   }, [group]);
 
   const handleItemCheck = (
     itemToCheck: ItemType,
     itemFromEditedGroup: ItemType
   ) => {
+    console.log(itemFromEditedGroup);
+    const newItemArray: ItemType[] = itemFromEditedGroup
+      ? editedGroup.items.filter((i) => i.infoId !== itemToCheck.infoId)
+      : editedGroup.items.concat([itemToCheck]);
+    console.log(newItemArray);
+    console.log(editedGroup.items);
     setEditedGroup({
-      items: itemFromEditedGroup
-        ? editedGroup.items.filter((i) => i.infoId !== itemToCheck.infoId)
-        : editedGroup.items.concat([itemToCheck]),
+      items: newItemArray,
     });
   };
 
@@ -51,27 +55,34 @@ const GroupView = ({
     newAmount: number,
     itemFromOriginalGroup: ItemType
   ) => {
+    console.log(newAmount);
     // 0, same as state. Positive, less than in state.
     // Negative is if more items of same infoId have been chosen from candidates
     const difference = itemFromOriginalGroup.itemIds.length - newAmount;
-    let editedItemsCopy: ItemType[] = editedGroup.items;
+    let editedItemsCopy: ItemType[] = JSON.parse(
+      JSON.stringify(editedGroup.items)
+    );
     let editedItem = editedItemsCopy.find(
       (i) => i.infoId === itemFromOriginalGroup.infoId
     );
-
     // treat setting new amount to 0, or not finding edited item in group, as if item is checked
     // NOTE: if "checking" an item this way, amount is reset.
     if (newAmount === 0 || !editedItem) {
       handleItemCheck(itemFromOriginalGroup, editedItem);
-    } else if (difference > 0) {
-      editedItem.itemIds = itemFromOriginalGroup.itemIds.slice(0, -difference);
-    } else if (difference < 0) {
-      console.log('trying to add more items!');
     } else {
-      // difference === 0, same as unchanged
-      editedItem.itemIds = itemFromOriginalGroup.itemIds;
+      if (difference > 0) {
+        editedItem.itemIds = itemFromOriginalGroup.itemIds.slice(
+          0,
+          -difference
+        );
+      } else if (difference < 0) {
+        console.log('trying to add more items!');
+      } else {
+        // difference === 0, same as unchanged
+        editedItem.itemIds = itemFromOriginalGroup.itemIds;
+      }
+      setEditedGroup({ items: editedItemsCopy });
     }
-    setEditedGroup({ items: editedItemsCopy });
   };
 
   console.log(group);
@@ -111,27 +122,34 @@ const GroupView = ({
         </div>
       </div>
       <div className="c-group-contents">
-        {group.items.map((item, key) => {
-          const itemInEditedGroup = editedGroup.items.find(
-            (i) => i.infoId === item.infoId
-          );
-          // console.log(item);
-          return (
-            <GroupContentItem
-              key={key}
-              item={item}
-              checked={!!itemInEditedGroup}
-              chosenAmount={itemInEditedGroup?.itemIds.length ?? 0}
-              maxAllowedAmount={
-                item.itemIds.length
-                // uncomment when implementing adding more items of same type directly in group contents
-                //+ candidates.find(i => i.infoId === item.infoId)?.itemIds.length ?? 0
-              }
-              handleCheck={() => handleItemCheck(item, itemInEditedGroup)}
-              changeAmount={(newAmount) => handleChangeAmount(newAmount, item)}
-            />
-          );
-        })}
+        <div className="c-group-contents__list-header">
+          <span>Kollin tillhörande grupp</span>
+        </div>
+        <div className="c-group-contents__list">
+          {group.items.map((item, key) => {
+            const itemInEditedGroup = editedGroup.items.find(
+              (i) => i.infoId === item.infoId
+            );
+            return (
+              <GroupContentItem
+                key={key}
+                item={item}
+                checked={!!itemInEditedGroup}
+                chosenAmount={itemInEditedGroup?.itemIds.length ?? 0}
+                maxAllowedAmount={
+                  item.itemIds.length
+                  // uncomment when implementing adding more items of same type directly in group contents
+                  //+ candidates.find(i => i.infoId === item.infoId)?.itemIds.length ?? 0
+                }
+                handleCheck={() => handleItemCheck(item, itemInEditedGroup)}
+                changeAmount={(newAmount) =>
+                  handleChangeAmount(newAmount, item)
+                }
+                allowEdit={editMode}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

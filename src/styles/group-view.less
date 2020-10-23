@@ -74,6 +74,26 @@
 .c-group-contents {
   width: 100%;
   min-height: 50vh;
+  padding: 8px 0;
+  &__list-header {
+    padding: 8px 16px;
+    width: 100%;
+    span {
+      font-weight: 300;
+      color: @dark-gray-color;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+  }
+  &__list {
+    width: 100%;
+    border: 0px solid @teal-color;
+    border-bottom-width: 0.5px;
+    .c-group-item {
+      border: 0px solid @teal-color;
+      border-top-width: 0.5px;
+    }
+  }
 }
 .c-group-item {
   width: 100%;
@@ -108,5 +128,15 @@
     height: 24px;
     width: 48px;
     margin: 0 4px;
+  }
+  // TODO create a better-looking checkbox.
+  &__check-box {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+  }
+  &__display-amount {
+    font-style: italic;
+    color: @gray-color;
   }
 }
