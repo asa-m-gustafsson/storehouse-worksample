@@ -74,7 +74,15 @@
 .c-group-contents {
   width: 100%;
   min-height: 50vh;
-  padding: 8px 0;
+  padding: 0 0;
+  &__list-wrapper {
+    width: 100%;
+    padding-top: 8px;
+    display: block;
+    &--hidden {
+      display: none;
+    }
+  }
   &__list-header {
     padding: 8px 16px;
     width: 100%;
@@ -89,6 +97,7 @@
     width: 100%;
     border: 0px solid @teal-color;
     border-bottom-width: 0.5px;
+
     .c-group-item {
       border: 0px solid @teal-color;
       border-top-width: 0.5px;
@@ -113,6 +122,7 @@
     align-items: center;
     justify-content: right;
   }
+
   &__counter {
     height: 100%;
     display: flex;

@@ -13,24 +13,20 @@ import {
   ListEntryIsItem,
 } from './item-types';
 
-export type ApiStateType = {
+export interface ApiStateType {
   events: TransportEvent[];
   itemInfos: ItemInfo[];
   itemEntities: ItemEntity[];
   itemGroups: ItemGroup[];
-};
-
-interface IApiAddItemsToGroupAction {
-  type: 'ADD_ITEMS_TO_GROUP';
-  itemsToAdd: number[];
-  groupToAddTo: number;
-}
-interface IApiRemoveItemsFromGroupAction {
-  type: 'REMOVE_ITEMS_FROM_GROUP';
-  itemsToRemove: number[];
-  groupToRemoveFrom: number;
 }
 
-export type ApiReducerAction =
-  | IApiAddItemsToGroupAction
-  | IApiRemoveItemsFromGroupAction;
+interface IApiCreateNewGroupAction {
+  type: 'CREATE_NEW_GROUP';
+  group: GroupType;
+}
+interface IApiUpdateGroupAction {
+  type: 'UPDATE_GROUP';
+  group: GroupType;
+}
+
+export type ApiReducerAction = IApiCreateNewGroupAction | IApiUpdateGroupAction;

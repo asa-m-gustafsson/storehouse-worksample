@@ -15,7 +15,28 @@ import {
 import { ApiStateType } from '../../types/api-types';
 import { LocationType, EventType } from '../../types/enums';
 
-// NOTE: There is A LOT of copy-pasted code here. In the future, break out into functions!
+export const updateGroupStatusForItemEntities = (
+  itemEntities: ItemEntity[],
+  actionGroup: GroupType
+) => {
+  console.log(actionGroup);
+  return itemEntities.map((ie) => {
+    let itemInActionGroup: ItemType = actionGroup.items.find(
+      (iig) => iig.infoId === ie.info_id
+    );
+    if (itemInActionGroup && itemInActionGroup.itemIds.includes(ie.id)) {
+      console.log('giving froup id');
+      ie.group_id = actionGroup.groupId;
+    } else {
+      console.log('taking froup id');
+      ie.group_id =
+        ie.group_id === actionGroup.groupId ? undefined : ie.group_id;
+    }
+    return ie;
+  });
+};
+
+// NOTE: There is A LOT of copy-pasted code below. In the future, break out into functions!
 
 export const extractSingleGroupFromState = (
   state: ApiStateType,

@@ -119,15 +119,15 @@ const initialState: ApiStateType = {
     { id: 16, info_id: 9, location: LocationType.Storage, group_id: 2 },
     { id: 17, info_id: 10, location: LocationType.Storage, group_id: 2 },
     { id: 18, info_id: 11, location: LocationType.Storage },
-    { id: 19, info_id: 12, location: LocationType.Home },
+    { id: 19, info_id: 12, location: LocationType.Home, group_id: 3 },
     { id: 20, info_id: 12, location: LocationType.Home },
     { id: 21, info_id: 12, location: LocationType.Home },
     { id: 22, info_id: 12, location: LocationType.Home },
     { id: 23, info_id: 12, location: LocationType.Storage },
     { id: 24, info_id: 12, location: LocationType.Storage },
     { id: 25, info_id: 12, location: LocationType.Storage },
-    { id: 26, info_id: 13, location: LocationType.Home },
-    { id: 27, info_id: 13, location: LocationType.Home },
+    { id: 26, info_id: 13, location: LocationType.Home, group_id: 3 },
+    { id: 27, info_id: 13, location: LocationType.Home, group_id: 3 },
     { id: 28, info_id: 13, location: LocationType.Home },
     { id: 29, info_id: 13, location: LocationType.Home },
     { id: 30, info_id: 13, location: LocationType.Home },
@@ -154,6 +154,10 @@ const initialState: ApiStateType = {
       name: 'Julpynt',
       photo_url: 'https://www.placecage.com/c/200/100',
       description: 'Allt vårt j*vla julpynt',
+    },
+    {
+      id: 3,
+      name: 'Cafégrupp',
     },
   ],
   events: [
@@ -185,6 +189,7 @@ const ApiContext = createContext<{
 
 const ApiProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ApiReducer, initialState);
+  console.log(state);
   return (
     <ApiContext.Provider value={{ state, dispatch }}>
       {children}
