@@ -46,7 +46,7 @@ const StandardLayout = (props: { children: ReactNode }) => {
           </ActiveLink>
         </div>
         <div className="c-navbar__link-wrapper">
-          <ActiveLink href="/">
+          <ActiveLink href="/other">
             <div className="c-navbar__button">
               {getSvg(SvgType.Other)}
               <span>Övrigt</span>

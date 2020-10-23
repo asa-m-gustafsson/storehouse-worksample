@@ -47,23 +47,39 @@ a {
 }
 
 .c-button {
-  .shaded-div(@gray-color-hsl, 2%);
+  .shaded-div(@gray-color-hsl, 15%);
   &--pink {
     .shaded-div(@pink-color-hsl, 2%);
   }
   &--teal {
     .shaded-div(@teal-color-hsl, 7%);
   }
-  display: inline-flex;
+
+  &:disabled {
+    .shaded-div(@gray-color-hsl, 15%);
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20%;
+  color: white;
+  font-size: 16px;
+  border: 0;
   &--full-width {
     height: 56px;
     width: 100%;
+
+    border-radius: 0%;
+  }
+  &--quantity {
+    height: 24px;
+    width: 24px;
   }
 
   &__text {
-    margin: auto;
-    font-weight: bold;
+    font-weight: 500;
     letter-spacing: 0.08em;
-    color: white;
   }
 }

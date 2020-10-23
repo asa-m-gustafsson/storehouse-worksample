@@ -21,12 +21,12 @@
 
 // Mixins
 
-.shaded-div(@div-color-hsl, @lighten-by-percent: 5%) {
-  background-color: rgb(@div-color-hsl);
-  box-shadow: rgb(@div-color-hsl) 0 2px 4px inset;
+.shaded-div(@div-color, @lighten-by-percent: 5%) {
+  background-color: @div-color;
+  box-shadow: @div-color 0 2px 4px inset;
   background-image: linear-gradient(
-    rgb(lighten(@div-color-hsl, @lighten-by-percent)),
-    rgb(@div-color-hsl),
-    rgb(darken(@div-color-hsl, 5%))
+    lighten(@div-color, @lighten-by-percent),
+    @div-color,
+    darken(@div-color, 5%)
   );
 }
