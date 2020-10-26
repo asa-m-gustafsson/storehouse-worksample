@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  ItemListForOverview,
-  ItemType,
-  GroupType,
-  GenericListType,
-  ListEntryIsItem,
-  GetTotalItemAmountForGroup,
-  GetTotalItemAmountForList,
-} from '../types/item-types';
+import { ItemType } from '../types/item-types';
 import { SvgType, getSvg } from '../support/get-svg';
 
 const GroupContentItem = ({

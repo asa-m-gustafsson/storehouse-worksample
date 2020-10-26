@@ -1,15 +1,6 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import '../styles/group-view.less';
-import {
-  ItemListForOverview,
-  ItemType,
-  GroupType,
-  GenericListType,
-  ListEntryIsItem,
-  GetTotalItemAmountForGroup,
-  GetTotalItemAmountForList,
-} from '../types/item-types';
-import { LocationType, EventType } from '../types/enums';
+import { ItemType, GroupType } from '../types/item-types';
 import { ApiContext } from '../support/fake-api/api-context';
 import { SvgType, getSvg } from '../support/get-svg';
 import GroupContentItem from './group-content-item';

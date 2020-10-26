@@ -1,17 +1,4 @@
-import {
-  ItemInfo,
-  ItemGroup,
-  Dimensions,
-  ItemEntity,
-  TransportEvent,
-} from '../../types/raw-data-types';
-import {
-  ItemListForOverview,
-  ItemType,
-  GroupType,
-  GenericListType,
-  ListEntryIsItem,
-} from '../../types/item-types';
+import { ItemGroup, ItemEntity } from '../../types/raw-data-types';
 import { ApiStateType, ApiReducerAction } from '../../types/api-types';
 import { updateGroupStatusForItemEntities } from './api-converters';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useWindowSize from '../support/hooks/use-window-size';
 import '../styles/overlay-menu.less';
 
