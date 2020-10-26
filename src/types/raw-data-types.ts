@@ -1,4 +1,4 @@
-import { LocationType, EventType } from './enums';
+import { LocationType, EventType } from './enum-types';
 
 export interface ItemInfo {
   id: number;

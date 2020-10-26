@@ -1,6 +1,6 @@
 import React from 'react';
 import { SvgType, getSvg } from '../support/get-svg';
-import { LocationType } from '../types/enums';
+import { LocationType } from '../types/enum-types';
 
 export enum OverlayButtonType {
   ViewGroup,

@@ -7,7 +7,7 @@ import {
   ListEntryIsItem,
   GetTotalItemAmountForList,
 } from '../types/item-types';
-import { LocationType } from '../types/enums';
+import { LocationType } from '../types/enum-types';
 
 const ItemOverview = ({
   location,

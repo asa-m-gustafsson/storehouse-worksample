@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { ItemListForOverview } from '../../types/item-types';
-import { LocationType } from '../../types/enums';
+import { LocationType } from '../../types/enum-types';
 import { ApiContext } from '../fake-api/api-context';
 import { extractItemListsFromState } from '../fake-api/api-converters';
 

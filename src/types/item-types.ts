@@ -1,4 +1,4 @@
-import { LocationType, EventType } from './enums';
+import { LocationType } from './enum-types';
 
 export type ItemListForOverview = {
   plannedTime?: Date;

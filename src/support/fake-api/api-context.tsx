@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import ApiReducer from './api-reducer';
-import { LocationType, EventType } from '../../types/enums';
+import { LocationType, EventType } from '../../types/enum-types';
 import { ApiStateType, ApiReducerAction } from '../../types/api-types';
 
 const initialState: ApiStateType = {

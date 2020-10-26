@@ -1,10 +1,4 @@
-import {
-  ItemInfo,
-  ItemGroup,
-  Dimensions,
-  ItemEntity,
-  TransportEvent,
-} from '../../types/raw-data-types';
+import { ItemEntity } from '../../types/raw-data-types';
 import {
   ItemListForOverview,
   ItemType,
@@ -13,7 +7,7 @@ import {
   ListEntryIsItem,
 } from '../../types/item-types';
 import { ApiStateType } from '../../types/api-types';
-import { LocationType, EventType } from '../../types/enums';
+import { LocationType, EventType } from '../../types/enum-types';
 
 export const updateGroupStatusForItemEntities = (
   itemEntities: ItemEntity[],

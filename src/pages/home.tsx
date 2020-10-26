@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import StandardLayout from '../components/layout/standard-layout';
 import ItemOverview from '../components/item-overview';
-import { LocationType } from '../types/enums';
+import { LocationType } from '../types/enum-types';
 import getItemLists from '../support/hooks/get-item-lists';
 
 type Page = NextPage & {
