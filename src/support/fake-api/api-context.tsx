@@ -61,7 +61,7 @@ const initialState: ApiStateType = {
       id: 9,
       name: 'Julgranspynt',
       description: 'Flyttkartong med julgranspynt',
-      photo_url: 'https://www.placekitten.com/400/300',
+      photo_url: 'https://placekitten.com/400/300',
       dimensions: { height: 40, width: 30, depth: 60 },
     },
     {
