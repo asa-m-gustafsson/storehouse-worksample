@@ -189,7 +189,6 @@ const ApiContext = createContext<{
 
 const ApiProvider = ({ children }) => {
   const [state, dispatch] = useReducer(ApiReducer, initialState);
-  console.log(state);
   return (
     <ApiContext.Provider value={{ state, dispatch }}>
       {children}

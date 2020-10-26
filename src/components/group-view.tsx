@@ -138,12 +138,12 @@ const GroupView = ({
               const itemInEditedGroup = editedGroup.items.find(
                 (i) => i.infoId === item.infoId
               );
-              console.log('amount of items in group: ', item.itemIds.length);
-              console.log(
-                'amount of candidates to add: ',
-                candidates.find((i) => i.infoId === item.infoId)?.itemIds
-                  .length ?? 0
-              );
+              // console.log('amount of items in group: ', item.itemIds.length);
+              // console.log(
+              //   'amount of candidates to add: ',
+              //   candidates.find((i) => i.infoId === item.infoId)?.itemIds
+              //     .length ?? 0
+              // );
               return (
                 <GroupContentItem
                   key={key}

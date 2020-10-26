@@ -5,7 +5,6 @@ import { updateGroupStatusForItemEntities } from './api-converters';
 const ApiReducer = (state: ApiStateType, action: ApiReducerAction) => {
   switch (action.type) {
     case 'CREATE_NEW_GROUP':
-      console.log(action.group);
       const newId: number =
         state.itemGroups.reduce((maxValue, group) => {
           return Math.max(group.id, maxValue);

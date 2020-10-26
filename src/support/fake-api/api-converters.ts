@@ -13,16 +13,13 @@ export const updateGroupStatusForItemEntities = (
   itemEntities: ItemEntity[],
   actionGroup: GroupType
 ) => {
-  console.log(actionGroup);
   return itemEntities.map((ie) => {
     let itemInActionGroup: ItemType = actionGroup.items.find(
       (iig) => iig.infoId === ie.info_id
     );
     if (itemInActionGroup && itemInActionGroup.itemIds.includes(ie.id)) {
-      console.log('giving froup id');
       ie.group_id = actionGroup.groupId;
     } else {
-      console.log('taking froup id');
       ie.group_id =
         ie.group_id === actionGroup.groupId ? undefined : ie.group_id;
     }

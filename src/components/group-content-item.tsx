@@ -33,7 +33,6 @@ const GroupContentItem = ({
       setInternalAmount(chosenAmount.toString());
     }
   };
-  console.log('item:', item.infoId, 'allowed amount:', maxAllowedAmount);
 
   return (
     <div className="c-group-item">
