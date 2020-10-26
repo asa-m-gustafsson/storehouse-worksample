@@ -39,7 +39,7 @@ const ItemListItem = ({
           <div className="c-item-card__picture-wrapper">
             <img
               className="c-item-card__picture"
-              src={item.photo_url ?? 'https://www.placecage.com/c/200/300'}
+              src={item.photo_url ?? 'https://www.placecage.com/g/200/300'}
               alt={item.name}
             />
           </div>

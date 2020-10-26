@@ -15,7 +15,7 @@ const initialState: ApiStateType = {
     {
       id: 2,
       name: 'Lasse Giraff',
-      photo_url: 'http://www.placekitten.com/400/800',
+      photo_url: 'https://www.placekitten.com/400/800',
       dimensions: { height: 430, width: 100, depth: 180 },
     },
     {
@@ -61,14 +61,14 @@ const initialState: ApiStateType = {
       id: 9,
       name: 'Julgranspynt',
       description: 'Flyttkartong med julgranspynt',
-      photo_url: 'http://www.placekitten.com/400/300',
+      photo_url: 'https://www.placekitten.com/400/300',
       dimensions: { height: 40, width: 30, depth: 60 },
     },
     {
       id: 10,
       name: 'Julbelysning (utomhus)',
       description: 'Flyttkartong med julbelysning för utomhusbruk',
-      photo_url: 'http://www.placekitten.com/900/600',
+      photo_url: 'https://www.placekitten.com/900/600',
       dimensions: { height: 40, width: 30, depth: 60 },
     },
     {

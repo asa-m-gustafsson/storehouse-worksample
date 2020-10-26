@@ -49,6 +49,11 @@ const useLongPress = (
   return {
     onMouseDown: (e) => start(e),
     onTouchStart: (e) => start(e),
+    onTouchMove: (e) => clear(e, false),
+    // onTouchMoveEvent: (e) => {
+    //   console.log('TouchMove');
+    //   clear(e);
+    // },
     onMouseUp: (e) => clear(e),
     onMouseLeave: (e) => clear(e, false),
     onTouchEnd: (e) => clear(e),

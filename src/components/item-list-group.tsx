@@ -53,7 +53,7 @@ const ItemListGroup = ({
             <div className="c-item-card__picture-wrapper">
               <img
                 className="c-item-card__picture"
-                src={group.photo_url ?? 'https://www.placecage.com/c/200/300'}
+                src={group.photo_url ?? 'https://www.placecage.com/g/200/300'}
                 alt={group.name}
               />
             </div>
